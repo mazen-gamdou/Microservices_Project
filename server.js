@@ -3,14 +3,15 @@ const express = require('express');
 const fs = require('fs');
 const path = require('path');
 const seedrandom = require('seedrandom');
+const os = require('os');
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000 
 
 app.use(express.static("www"));
 
 app.get('/Word', (req, res) => {
-  const filePath = path.join(__dirname, 'data', 'liste_francais.txt');
+  const filePath = path.join(__dirname, 'data', 'liste_francais_utf8.txt');
 
   fs.readFile(filePath, 'utf8', (err, data) => {
     if (err) {
@@ -43,3 +44,11 @@ app.get('/Word', (req, res) => {
 app.listen(port, () => {
   console.log(`Server is listening at http://localhost:${port}`);
 });
+
+app.get('/port', (req, res) => {
+  const hostname = os.hostname();
+  res.send(`MOTUS APP working on ${hostname} port ${port}`);
+});
+
+
+
