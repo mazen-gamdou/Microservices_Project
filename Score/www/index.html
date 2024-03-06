@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -34,6 +34,8 @@
             <td id='averageTry'>Loading...</td>
         </tr>
     </table>
+    <br>
+    <button onclick="window.location.href='http://localhost:3000';">Back to Game</button>
 
     <script>
         const playerId = 'Mazen'; // Use the key from Redis
@@ -61,5 +63,35 @@
 
         window.onload = fetchAndDisplayScores;
     </script>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Score Page</title>
+    <link rel="stylesheet" href="style.css"> <!-- Link to the external CSS file -->
+</head>
+<body>
+    <h1 id="usernameScore">Loading...</h1>
+    <table>
+        <tr>
+            <th>Information</th>
+            <th>Value</th>
+        </tr>
+        <tr>
+            <td>Number of words found</td>
+            <td id='wordCount'>Loading...</td>
+        </tr>
+        <tr>
+            <td>Average try</td>
+            <td id='averageTry'>Loading...</td>
+        </tr>
+    </table>
+    <br>
+    <button onclick="window.location.href='http://localhost:3000';">Back to Game</button>
+
+    <script src="script.js"></script>
 </body>
 </html>

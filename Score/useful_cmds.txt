@@ -1,1 +1,8 @@
 docker compose up
+
+git remote set-url origin https://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@github.com/mazen-gamdou/Microservices_Project.git
+
+
+sudo git add .
+sudo git commit -m "initial commit"
+sudo git push origin amr
