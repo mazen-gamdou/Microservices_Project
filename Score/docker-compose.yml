@@ -10,7 +10,6 @@ services:
     restart: always
     volumes:
       - ./data/redis:/data
-
   redisinsight:
     image: redislabs/redisinsight:latest
     container_name: redisinsight
