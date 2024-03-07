@@ -1,0 +1,61 @@
+docker run --name postgres_container -e POSTGRES_PASSWORD=toto -d -p 5432:5432 -v /postgres-init:/docker-entrypoint-initdb.d postgres
+ 1056  docker run --name postgres_container -e POSTGRES_PASSWORD=toto -d -p 5432:5432 -v ./postgres-init:/docker-entrypoint-initdb.d postgres
+ 1057  docker rm -f postgres_container
+ 1058  docker run --name postgres_container -e POSTGRES_PASSWORD=toto -d -p 5432:5432 -v ./postgres-init:/docker-entrypoint-initdb.d postgres
+ 1059  psql -h localhost -p 5432 -U postgres -W
+ 1060  psql -h localhost -p 5432 -U postgres -W
+ 1061  docker ps
+ 1062  docker logs postgres_container\n
+ 1063  docker logs postgres_container
+ 1064  docker logs postgres_container
+ 1065  docker rm -f postgres_container
+ 1066  docker run --name postgres_container -e POSTGRES_PASSWORD=toto -d -p 5432:5432 -v ./postgres-init:/docker-entrypoint-initdb.d postgres
+ 1067  docker logs postgres_container
+ 1068  docker exec -it postgres_container psql -U postgres
+ 1069  node auth.js
+ 1070  node auth.js
+ 1071  node auth.js
+ 1072  docker exec -it postgres_container psql -U postgres
+ 1073  git status
+ 1074  git add .
+ 1075  git commit -m "updated auth app AGAIN\n
+ 1076  git commit -m "updated auth app AGAIN"
+ 1077  git push
+ 1078  node auth.js
+ 1079  docker ps
+ 1080  history
+ 1081  docker build -t auth_app
+ 1082  docker build -t auth_app .
+ 1083  docker run -p 3002:3002 -d auth_app\n
+ 1084  docker ps
+ 1085  docker run -p 3002:3002 -d auth_app
+ 1086  docker run -p 3002:3002 -d auth_app
+ 1087  docker run -p 3002:3002 -d auth_app
+ 1088  docker ps -a
+ 1089  docker logs 72
+ 1090  docker build -t auth-app .\n
+ 1091  docker run -p 3002:3002 -d auth-app\n
+ 1092  docker ps -a
+ 1093  docker network create at-network\n
+ 1094  docker ps
+ 1095  docker stop 69
+ 1096  docker rm 69
+ 1097  docker stop a2
+ 1098  docker rm a2
+ 1099  docker run --name postgres_container --network at-network -e POSTGRES_PASSWORD=toto -d -p 5432:5432 -v postgres_data:/var/lib/postgresql/data postgres\n
+ 1100  docker network connect at-network postgres_container\n
+ 1101  docker ps
+ 1102  docker build -t auth-app .
+ 1103  docker run --name auth-app-instance --network at-network -p 3002:3002 -d auth-app\n
+ 1104  docker ps
+ 1105  docker stop 00
+ 1106  docker rm 00
+ 1107  docker stop 23
+ 1108  docker rm 23
+ 1109  docker ps
+ 1110  docker run --name postgres_container --network at-network -e POSTGRES_PASSWORD=toto -d postgres\n
+ 1111  docker run --name my_app_container --network at-network -e DB_HOST=postgres_container -e DB_PASSWORD=toto -d my_app_image\n
+ 1112  docker images
+ 1113  docker run --name auth_container --network at-network -e DB_HOST=postgres_container -e DB_PASSWORD=toto -d auth-app\n
+ 1114  node auth.js
+ 1115  history

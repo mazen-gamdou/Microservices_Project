@@ -4,6 +4,8 @@ const bcrypt = require('bcrypt');
 const session = require('express-session');
 const crypto = require('crypto');
 const { Pool } = require('pg');
+const os = require('os');
+
 
 // PostgreSQL pool setup
 const pool = new Pool({
@@ -16,7 +18,7 @@ const pool = new Pool({
 
 // Create the Express app
 const app = express();
-const PORT = 3002; // Define the port to run on localhost
+const PORT = process.env.PORT || 3002; // Define the port to run on localhost
 
 // Middleware for parsing request bodies
 app.use(express.urlencoded({ extended: true }));
@@ -116,4 +118,9 @@ app.get('/', isAuthenticated, (req, res) => {
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
+});
+
+app.get('/port', (req, res) => {
+  const hostname = os.hostname();
+  res.send(`Auth APP working on ${hostname} port ${port}`);
 });
