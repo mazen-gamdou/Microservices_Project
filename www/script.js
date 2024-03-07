@@ -78,3 +78,11 @@ $(document).ready(function() {
     }
   });
   
+  $(document).ready(function() {
+    // Fetch user's name from the server
+    $.get('/getUserName', function(response) {
+      $('#user-name').text('Welcome, ' + response.username);
+    }).fail(function() {
+      console.log('Error fetching user name.');
+    });
+  });
