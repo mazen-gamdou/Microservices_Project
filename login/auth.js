@@ -7,13 +7,21 @@ const { Pool } = require('pg');
 const os = require('os');
 
 
+// // PostgreSQL pool setup
+// const pool = new Pool({
+//   user: 'postgres', // default user, change if you have set a different one
+//   host: process.env.DB_HOST || 'localhost', // use 'localhost' if the server is on the same host outside Docker, or the Docker internal IP/hostname if both are in Docker
+//   database: 'postgres', // default database, change if you have set a different one
+//   password: process.env.DB_PASSWORD || 'toto', // adjust the password
+//   port: process.env.DB_PORT || 5432, // default PostgreSQL port
+// });
 // PostgreSQL pool setup
 const pool = new Pool({
-  user: 'postgres', // default user, change if you have set a different one
-  host: process.env.DB_HOST || 'localhost', // use 'localhost' if the server is on the same host outside Docker, or the Docker internal IP/hostname if both are in Docker
-  database: 'postgres', // default database, change if you have set a different one
-  password: process.env.DB_PASSWORD || 'toto', // adjust the password
-  port: process.env.DB_PORT || 5432, // default PostgreSQL port
+  user: 'postgres',
+  host: 'postgres-db', // Use the container name as the host
+  database: 'postgres',
+  password: 'toto',
+  port: 5432,
 });
 
 // Create the Express app
