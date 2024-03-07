@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  app:
+    build: .
+    ports:
+      - "3002:3002"
+    environment:
+      - DATABASE_URL=postgres://postgres:tokyodata@db:5432/postgres
+    depends_on:
+      - db
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: tokyodata
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

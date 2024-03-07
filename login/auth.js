@@ -5,17 +5,18 @@ const session = require('express-session');
 const crypto = require('crypto');
 const { Pool } = require('pg');
 
+// PostgreSQL pool setup
+const pool = new Pool({
+  user: 'postgres', // default user, change if you have set a different one
+  host: process.env.DB_HOST || 'localhost', // use 'localhost' if the server is on the same host outside Docker, or the Docker internal IP/hostname if both are in Docker
+  database: 'postgres', // default database, change if you have set a different one
+  password: process.env.DB_PASSWORD || 'toto', // adjust the password
+  port: process.env.DB_PORT || 5432, // default PostgreSQL port
+});
+
 // Create the Express app
 const app = express();
 const PORT = 3002; // Define the port to run on localhost
-
-const pool = new Pool({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'postgres',
-  password: 'tokyodata',
-  port: 5432,
-});
 
 // Middleware for parsing request bodies
 app.use(express.urlencoded({ extended: true }));
@@ -29,7 +30,7 @@ app.use(session({
   cookie: { secure: false } // Note: Set secure: true if you're using HTTPS
 }));
 
-// Hash password (for demonstration, ideally do this during user registration)
+// Hash password
 const hashPassword = async (password) => await bcrypt.hash(password, 10);
 
 // Authentication middleware
@@ -41,7 +42,7 @@ function isAuthenticated(req, res, next) {
   }
 }
 
-// Define your routes directly on the app for simplicity
+// Define routes
 
 // Login page route
 app.get('/login', (req, res) => {
@@ -57,16 +58,13 @@ app.get('/register', (req, res) => {
 app.post('/login', async (req, res) => {
   const { username, password } = req.body;
   try {
-    const result = await pool.query(
-      'SELECT * FROM users WHERE username = $1',
-      [username]
-    );
+    const result = await pool.query('SELECT * FROM users WHERE username = $1', [username]);
     if (result.rows.length > 0) {
       const user = result.rows[0];
       const match = await bcrypt.compare(password, user.password);
       if (match) {
         req.session.username = username;
-        res.redirect('http://localhost:3000'); // Redirect to the game main page
+        res.redirect('http://localhost:3000'); 
       } else {
         res.send('Invalid username or password');
       }
@@ -85,7 +83,7 @@ app.post('/register', async (req, res) => {
   try {
     const hashedPassword = await hashPassword(password);
     const result = await pool.query(
-      'INSERT INTO users(first_name, last_name, username, password) VALUES($1, $2, $3, $4) RETURNING id',
+      'INSERT INTO users(first_name, last_name, username, password) VALUES($1, $2, $3, $4) RETURNING username',
       [first_name, last_name, username, hashedPassword]
     );
     if (result.rows.length > 0) {
@@ -110,8 +108,9 @@ app.get('/logout', (req, res) => {
   });
 });
 
-app.get('/', (req, res) => {
-  res.redirect('/login');
+app.get('/', isAuthenticated, (req, res) => {
+  // Protected route example
+  res.send('Welcome, you are authenticated!');
 });
 
 // Start the server

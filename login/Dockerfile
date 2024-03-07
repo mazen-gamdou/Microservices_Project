@@ -1,20 +1,20 @@
-# Use an official Node.js runtime as a base image
+# Use the official Node.js 16 image as a parent image
 FROM node:16
 
-# Set the working directory in the container
+# Set the working directory
 WORKDIR /usr/src/app
 
-# Copy package.json and package-lock.json to the working directory
+# Copy package.json and package-lock.json
 COPY package*.json ./
 
-# Install app dependencies
+# Install dependencies
 RUN npm install
 
-# Copy the application code into the container
+# Copy the rest of your app's source code
 COPY . .
 
-# Expose the port your app will run on
-EXPOSE 3004
+# Your app binds to port 3002 so you'll use the EXPOSE instruction to have it mapped by the docker daemon
+EXPOSE 3002
 
-# Command to run your application
-CMD ["node", "auth.js"]
+# Define the command to run your app
+CMD [ "node", "auth.js" ]
