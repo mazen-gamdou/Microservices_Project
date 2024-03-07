@@ -3,13 +3,14 @@ const bodyParser = require('body-parser');
 const redis = require('redis');
 const app = express();
 const port = process.env.PORT || 3005;
+const redis_url = process.env.REDIS_URL || 'redis://redis:6379';
 
 app.use(express.static("www"));
 app.use(bodyParser.json());
 
 // Create a Redis client
 const client = redis.createClient({
-    url: 'redis://localhost:6379'
+    url: redis_url
 });
 
 // Handle Redis client errors

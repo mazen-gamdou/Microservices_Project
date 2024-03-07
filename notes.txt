@@ -1,0 +1,2 @@
+we will need to modify the haproxy and docker compose to 
+accommodate the mapping of the ports of the motus container to the other containers

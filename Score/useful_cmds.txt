@@ -1,17 +1,22 @@
-docker compose up
-
 git remote set-url origin https://<token>@github.com/mazen-gamdou/Microservices_Project.git
 
-
 sudo git add .
-sudo git commit -m "updated score and added redirection buttons in score and motus"
-sudo git push origin amr*
-
-
-
+sudo git commit -m "updated score"
+sudo git push origin amr
 
 # score API testing
 
 curl -X POST http://localhost:3005/setscore -H "Content-Type: application/json" -d '{"playerId": "Amr", "wordsFound": 42, "averageTries": 6.5}'
 
 curl "http://localhost:3005/getscore?playerId=playerScore:Amr"
+
+docker run -d -p 3005:3005 --name my-score-app --network=score_redis-net score-server
+
+docker compose up --build
+
+
+
+docker build -t score-app . --no-cache
+docker run -d --name redis --network mynetwork -p 6379:6379 -v ./data/redis:/data redis
+docker run -d --name redisinsight --network mynetwork -p 5540:5540 redislabs/redisinsight:latest
+docker run -d --name score-app --network mynetwork -p 3005:3005 -e REDIS_URL=redis://redis:6379 score-app

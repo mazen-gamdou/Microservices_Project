@@ -1,4 +1,4 @@
-const playerId = 'playerScore:Thu'; // Use the key from Redis
+const playerId = 'Mazen'; // Use the key from Redis
 
 function fetchAndDisplayScores() {
     fetch(`/getscore?playerId=${playerId}`)
