@@ -28,10 +28,13 @@ const pool = new Pool({
 const app = express();
 const PORT = process.env.PORT || 3002; // Define the port to run on localhost
 
-// For development: Allow all origins
-app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
+// Adjust the CORS options to include the correct origin
+const corsOptions = {
+  origin: ['http://localhost:3000', 'http://localhost:3005'], // Add 'http://localhost:3005' to the list
+  credentials: true, // to support cookies
+};
 
-
+app.use(cors(corsOptions));
 // Middleware for parsing request bodies
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
