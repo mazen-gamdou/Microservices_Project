@@ -1,14 +1,77 @@
-#word-input {
-    width: 30px;
-    text-align: center;
-  }
-  
-  .green {
-    background-color: green;
-  }
-  
-  .orange {
-    background-color: orange;
-  }
+/* Reset some default styling */
+body,
+h1,
+p,
+form {
+  margin: 0;
+  padding: 0;
+}
 
-  
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f8f8f8;
+  color: #333;
+}
+
+h1 {
+  text-align: center;
+  padding: 20px 0;
+  background-color: #4caf50;
+  color: #fff;
+}
+
+#guess-form {
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#word-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+#result {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.green {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+.orange {
+  background-color: #ff9800;
+  color: #fff;
+}
+
+/* Responsive styling for smaller screens */
+@media (max-width: 600px) {
+  #guess-form,
+  #result {
+    margin: 10px;
+  }
+}
