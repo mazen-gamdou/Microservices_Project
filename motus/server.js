@@ -3,10 +3,13 @@ const path = require('path');
 const fs = require('fs');
 const seedrandom = require('seedrandom');
 const { Pool } = require('pg');
+const session = require('express-session');
+const crypto = require('crypto');
 
-const router = express.Router();
+const app = express();
+const PORT = 3000; 
 
-// Define the pool here if not importing
+// Initialize PostgreSQL pool
 const pool = new Pool({
   user: 'postgres',
   host: 'localhost',
@@ -15,14 +18,32 @@ const pool = new Pool({
   port: 5432,
 });
 
+// Middleware for parsing request bodies
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+// Session setup
+app.use(session({
+  secret: crypto.randomBytes(64).toString('hex'),
+  resave: false,
+  saveUninitialized: false,
+  cookie: { secure: true } // Note: Set secure to true if you're using HTTPS
+}));
+
 // Serve static files from 'www' directory
-router.use('/www', express.static(path.join(__dirname, 'www')));
+app.use(express.static(path.join(__dirname, 'www')));
 
-// Assuming isAuthenticated is exported from auth.js
-const { isAuthenticated } = require('../login/auth'); 
+// Authentication middleware
+const isAuthenticated = (req, res, next) => {
+  if (req.session.username) {
+    next();
+  } else {
+    res.redirect('/login');
+  }
+};
 
-// get user's first name
-router.get('/getUserName', isAuthenticated, async (req, res) => {
+// Example authenticated route: Get user's first name
+app.get('/getUserName', isAuthenticated, async (req, res) => {
   const username = req.session.username;
   try {
     const result = await pool.query('SELECT first_name FROM users WHERE username = $1', [username]);
@@ -37,8 +58,8 @@ router.get('/getUserName', isAuthenticated, async (req, res) => {
   }
 });
 
-// Protected route example: Serve a random word from a list
-router.get('/Word', isAuthenticated, (req, res) => {
+// Example protected route: Serve a random word from a list
+app.get('/Word', isAuthenticated, (req, res) => {
   const filePath = path.join(__dirname, 'data', 'liste_francais_utf8.txt');
   fs.readFile(filePath, 'utf8', (err, data) => {
     if (err) {
@@ -54,7 +75,7 @@ router.get('/Word', isAuthenticated, (req, res) => {
   });
 });
 
-
-module.exports = router;
-
-
+// Start the server
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
+});
