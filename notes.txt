@@ -8,3 +8,4 @@ Done:
 to do:
 - add user to redis database on registration
 - add set and get score APIs to Motus
+- Add docker compose file in the root (modify it so that it works)
