@@ -5,7 +5,10 @@ const session = require('express-session');
 const crypto = require('crypto');
 const { Pool } = require('pg');
 
-const router = express.Router();
+// Create the Express app
+const app = express();
+const PORT = 3002; // Define the port to run on localhost
+
 const pool = new Pool({
   user: 'postgres',
   host: 'localhost',
@@ -15,15 +18,15 @@ const pool = new Pool({
 });
 
 // Middleware for parsing request bodies
-router.use(express.urlencoded({ extended: true }));
-router.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 // Session setup
-router.use(session({
+app.use(session({
   secret: crypto.randomBytes(64).toString('hex'),
   resave: false,
   saveUninitialized: false,
-  cookie: { secure: false }
+  cookie: { secure: false } // Note: Set secure: true if you're using HTTPS
 }));
 
 // Hash password (for demonstration, ideally do this during user registration)
@@ -38,18 +41,20 @@ function isAuthenticated(req, res, next) {
   }
 }
 
+// Define your routes directly on the app for simplicity
+
 // Login page route
-router.get('/login', (req, res) => {
+app.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, 'www', 'login.html'));
 });
 
 // Register page route
-router.get('/register', (req, res) => {
+app.get('/register', (req, res) => {
   res.sendFile(path.join(__dirname, 'www', 'register.html'));
 });
 
 // Login logic
-router.post('/login', async (req, res) => {
+app.post('/login', async (req, res) => {
   const { username, password } = req.body;
   try {
     const result = await pool.query(
@@ -61,7 +66,7 @@ router.post('/login', async (req, res) => {
       const match = await bcrypt.compare(password, user.password);
       if (match) {
         req.session.username = username;
-        res.redirect('/www/index.html'); // Redirect to the game main page
+        res.redirect('http://localhost:3000'); // Redirect to the game main page
       } else {
         res.send('Invalid username or password');
       }
@@ -75,7 +80,7 @@ router.post('/login', async (req, res) => {
 });
 
 // Registration logic
-router.post('/register', async (req, res) => {
+app.post('/register', async (req, res) => {
   const { first_name, last_name, username, password } = req.body;
   try {
     const hashedPassword = await hashPassword(password);
@@ -98,11 +103,18 @@ router.post('/register', async (req, res) => {
   }
 });
 
-
 // Logout logic
-router.get('/logout', (req, res) => {
+app.get('/logout', (req, res) => {
   req.session.destroy(() => {
     res.redirect('/login');
   });
 });
-module.exports = { isAuthenticated, router };
+
+app.get('/', (req, res) => {
+  res.redirect('/login');
+});
+
+// Start the server
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
+});
