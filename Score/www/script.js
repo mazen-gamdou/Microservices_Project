@@ -1,4 +1,4 @@
-const playerId = 'Amr'; // Use the key from Redis
+const playerId = 'playerScore:Thu'; // Use the key from Redis
 
 function fetchAndDisplayScores() {
     fetch(`/getscore?playerId=${playerId}`)
@@ -9,7 +9,9 @@ function fetchAndDisplayScores() {
             return response.json();
         })
         .then(data => {
-            document.getElementById('usernameScore').textContent = `${playerId}'s Score`;
+            // Remove 'playerScore:' prefix from playerId when displaying
+            const displayName = playerId.replace('playerScore:', '');
+            document.getElementById('usernameScore').textContent = `${displayName}'s Score`;
             document.getElementById('wordCount').textContent = data.wordsFound;
             document.getElementById('averageTry').textContent = data.averageTries;
         })

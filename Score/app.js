@@ -48,7 +48,8 @@ app.get('/getscore', async (req, res) => {
     }
 
     try {
-        const scoreData = await client.hGetAll(playerId); // Use the playerId directly
+        // Retrieve the player's score information from Redis
+        const scoreData = await client.hGetAll(`playerScore:${playerId}`);
         if (scoreData.wordsFound && scoreData.averageTries) {
             res.json({
                 playerId: playerId,
