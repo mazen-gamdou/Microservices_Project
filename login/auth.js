@@ -5,7 +5,7 @@ const session = require('express-session');
 const crypto = require('crypto');
 const { Pool } = require('pg');
 const os = require('os');
-
+const cors = require('cors');
 
 // // PostgreSQL pool setup
 // const pool = new Pool({
@@ -27,6 +27,10 @@ const pool = new Pool({
 // Create the Express app
 const app = express();
 const PORT = process.env.PORT || 3002; // Define the port to run on localhost
+
+// For development: Allow all origins
+app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
+
 
 // Middleware for parsing request bodies
 app.use(express.urlencoded({ extended: true }));
@@ -121,6 +125,11 @@ app.get('/logout', (req, res) => {
 app.get('/', isAuthenticated, (req, res) => {
   // Protected route example
   res.send('Welcome, you are authenticated!');
+});
+
+app.get('/api/user', isAuthenticated, async (req, res) => {
+  // Send back the username from the session
+  res.json({ username: req.session.username });
 });
 
 // Start the server
