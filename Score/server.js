@@ -4,7 +4,7 @@ const redis = require('redis');
 const app = express();
 const port = process.env.PORT || 3005;
 const redis_url = process.env.REDIS_URL || 'redis://redis:6379';
-
+const cors = require('cors');
 app.use(express.static("www"));
 app.use(bodyParser.json());
 
@@ -12,6 +12,13 @@ app.use(bodyParser.json());
 const client = redis.createClient({
     url: redis_url
 });
+// If the Motus game runs on a different port, add it to the allowed origins
+const corsOptions = {
+    origin: 'http://localhost:3000', // Replace with the actual origin of your Motus game
+    credentials: true,
+  };
+  
+app.use(cors(corsOptions));
 
 // Handle Redis client errors
 client.on('error', (err) => console.log('Redis Client Error', err));
@@ -41,7 +48,6 @@ app.post('/setscore', async (req, res) => {
     }
 });
 
-// Endpoint to get the score for a player
 app.get('/getscore', async (req, res) => {
     const { playerId } = req.query;
     if (!playerId) {
@@ -51,20 +57,35 @@ app.get('/getscore', async (req, res) => {
     try {
         // Retrieve the player's score information from Redis
         const scoreData = await client.hGetAll(`playerScore:${playerId}`);
-        if (scoreData.wordsFound && scoreData.averageTries) {
+
+        // If the user's score data is not found, initialize it
+        if (!scoreData || (!scoreData.wordsFound && !scoreData.averageTries)) {
+            // Initialize the score for the player
+            await client.hSet(`playerScore:${playerId}`, {
+                wordsFound: "0",
+                averageTries: "0"
+            });
+
+            // Respond with the initialized score data
+            res.json({
+                playerId: playerId,
+                wordsFound: 0,
+                averageTries: 0
+            });
+        } else {
+            // Respond with the existing score data
             res.json({
                 playerId: playerId,
                 wordsFound: parseInt(scoreData.wordsFound, 10),
                 averageTries: parseFloat(scoreData.averageTries)
             });
-        } else {
-            res.status(404).send('Score not found');
         }
     } catch (error) {
-        console.error('Error getting score:', error);
-        res.status(500).send('Error getting score');
+        console.error('Error getting/initializing score:', error);
+        res.status(500).send('Error getting/initializing score');
     }
 });
+
 
 // Start the server
 app.listen(port, () => {
