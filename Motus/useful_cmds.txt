@@ -1,2 +1,9 @@
 docker build -t motus . --no-cache
 docker run -p 3000:3000 -d motus
+
+docker build -t motus . --no-cache
+docker run --name motus-container1 --network auth-network -p 4001:4000 -d motus
+docker run --name motus-container2 --network auth-network -p 4002:4000 -d motus
+
+
+sudo chmod +r /usr/local/etc/haproxy/haproxy.cfg
