@@ -9,6 +9,7 @@ This web application features a motus game, an authentication system and a scori
 - **Authentication Service**: Handles user registration and login.
 - **Game Service**: Manages the Motus game logic.
 - **Score API**: Tracks and retrieves player scores.
+- **HAProxy Load Balancer**: Distributes incoming traffic between two instances of the Motus Game Service to ensure load balancing and high availability.
 ![Untitled diagram-2024-03-08-195949](https://github.com/mazen-gamdou/Microservices_Project/assets/67543487/af6135a4-0c20-4a4f-9ef1-c098f340ce64)
 
 ## Authentication Service
