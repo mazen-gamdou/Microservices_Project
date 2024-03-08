@@ -100,8 +100,8 @@ This web application features a motus game, an authentication system and a scori
 
 ### Technologies
 
-- Backend: [Your technology stack]
-- Database: Integrated with the main PostgreSQL database for user validation.
+- Backend: Node.jS 
+- Backend web application framework: Express.js
 
 ## Score API
 
@@ -134,13 +134,18 @@ This web application features a motus game, an authentication system and a scori
 - Database: Redis
 - Backend: [Your technology stack]
 
+## HAProxy Load Balancer
+
+Distributes traffic to the Motus Game Service instances, enhancing application scalability and availability.
+
+
 ## Security Considerations
 
 Ensure all communications are secured via HTTPS, and passwords are hashed before being stored in the PostgreSQL database. Use JWTs (JSON Web Tokens) for managing user sessions post-authentication.
 
 ## Deployment
 
-[Include instructions on how to deploy the microservices, covering any Docker containers, Kubernetes configurations, or cloud-specific deployment instructions.]
+The application is deployed using Docker and Docker Compose, enabling streamlined setup and scalability. The `docker-compose.yml` file defines the services, networks, and volumes required for the application.
 
 ---
 
