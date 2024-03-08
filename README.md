@@ -47,7 +47,9 @@ This web application features a motus game, an authentication system and a scori
   - **Error Response Example**:
     ```json
     {
-     "message": "User registered successfully."
+     "message": "Registration failed."
+     "message": "User already exists"
+     "message": "Internal Server Error"
     }
     ```
 - `/login`: 
