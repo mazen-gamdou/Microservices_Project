@@ -14,17 +14,17 @@ This web application features a motus game, an authentication system and a scori
 
 ### Technologies
 
-- Database: PostgreSQL
-- Backend: NodeJS
-- Server: Express.js
-- Security: Bcrypt for password hashing, crypto for secure tokens
-- Session Management: Express-session
-- Cross-Origin Resource Sharing: CORS
+- **Database**: PostgreSQL
+- **Backend**: NodeJS
+- **Server**: Express.js
+- **Security**: Bcrypt for password hashing, crypto for secure tokens
+- **Session Management**: Express-session
+- **Cross-Origin Resource Sharing**: CORS
 
 ### Endpoints
 
 - `/register`: 
-  - **Endpoint**: /register
+  - **Endpoint**: /register 
   - **Method**: POST
   - **Description**: Registers a new user by adding their details to the database.
   - **Body**: 
