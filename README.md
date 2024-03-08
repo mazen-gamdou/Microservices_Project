@@ -14,34 +14,78 @@ This web application features a motus game, an authentication system and a scori
 
 ### Technologies
 
-- Database: PostgreSQL , Redis
+- Database: PostgreSQL
 - Backend: NodeJS
+- Server: Express.js
+- Security: Bcrypt for password hashing, crypto for secure tokens
+- Session Management: Express-session
+- Cross-Origin Resource Sharing: CORS
 
 ### Endpoints
 
-- `/register`: Registers a new user.
+- `/register`: 
+  - **Endpoint**: /register
   - **Method**: POST
-  - **Body**:
+  - **Description**: Registers a new user by adding their details to the database.
+  - **Body**: 
     ```json
     {
-      "firstname": "John",
-      "lastname": "Doe",
-      "username": "john_doe",
+      "firstname": "Tokyo",
+      "lastname": "Doan",
+      "username": "toto",
       "password": "secure_password"
     }
     ```
-  - **Response**: Confirmation of registration.
+  - **Response**:  A message confirming registration or an error message if registration fails.
+  - **Success Response Example**:
+   ```json
+    {
+     "message": "User registered successfully."
+    }
+    ```
 
-- `/login`: Authenticates a user.
+  - **Error Response Example**:
+  ```json
+    {
+     "message": "User registered successfully."
+    }
+    ```
+
+- `/login`: 
+  - **Endpoint**: /login
   - **Method**: POST
-  - **Body**:
+  - **Description**: Authenticates a user by checking their credentials and creating a session.
+  - **Body**: 
     ```json
     {
-      "username": "john_doe",
+      "username": "toto",
       "password": "secure_password"
     }
     ```
-  - **Response**: Authentication token.
+  - **Response**: A redirection to the game's main page if successful, or an error message if login fails.
+  - **Error Response Example**:
+    ```json
+    {
+      "error": "Invalid username or password."
+    }
+    ```
+- **User Session Check**
+  -**Endpoint**: /api/user
+  -**Method**: GET
+  -**Description**: Checks if the user is currently logged in and returns the username.
+  -**Response**: JSON object with the username if the user is authenticated.
+  -**Success Response Example**:
+     ```json
+    {
+        "username": "toto"
+    }
+    ```
+### Security Considerations
+
+**Passwords**: All passwords are hashed using bcrypt before being stored in the database.
+**Sessions**: Sessions are managed with express-session. Ensure to use the secure flag on cookies in production with HTTPS.
+**Environment Variables**: Do not hardcode sensitive information such as database credentials. Use environment variables.
+**CORS**: Configure CORS appropriately to ensure that the API only accepts requests from trusted origins.
 
 ## Game Service
 
