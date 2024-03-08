@@ -71,11 +71,11 @@ This web application features a motus game, an authentication system and a scori
     ```
 - **User Session Check**
   
-  -**Endpoint**: /api/user
-  -**Method**: GET
-  -**Description**: Checks if the user is currently logged in and returns the username.
-  -**Response**: JSON object with the username if the user is authenticated.
-  -**Success Response Example**:
+  - **Endpoint**: /api/user
+  - **Method**: GET
+  - **Description**: Checks if the user is currently logged in and returns the username.
+  - **Response**: JSON object with the username if the user is authenticated.
+  - **Success Response Example**:
     ```json
      {
         "username": "toto"
@@ -83,10 +83,10 @@ This web application features a motus game, an authentication system and a scori
      ```
 ### Security Considerations
 
--**Passwords**: All passwords are hashed using bcrypt before being stored in the database.
--**Sessions**: Sessions are managed with express-session. Ensure to use the secure flag on cookies in production with HTTPS.
--**Environment Variables**: Do not hardcode sensitive information such as database credentials. Use environment variables.
--**CORS**: Configure CORS appropriately to ensure that the API only accepts requests from trusted origins.
+- **Passwords**: All passwords are hashed using bcrypt before being stored in the database.
+- **Sessions**: Sessions are managed with express-session. Ensure to use the secure flag on cookies in production with HTTPS.
+- **Environment Variables**: Do not hardcode sensitive information such as database credentials. Use environment variables.
+- **CORS**: Configure CORS appropriately to ensure that the API only accepts requests from trusted origins.
 
 ## Game Service
 
