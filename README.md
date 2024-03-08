@@ -75,11 +75,11 @@ This web application features a motus game, an authentication system and a scori
   -**Description**: Checks if the user is currently logged in and returns the username.
   -**Response**: JSON object with the username if the user is authenticated.
   -**Success Response Example**:
-     ```json
-    {
+    ```json
+     {
         "username": "toto"
-    }
-    ```
+     }
+     ```
 ### Security Considerations
 
 -**Passwords**: All passwords are hashed using bcrypt before being stored in the database.
