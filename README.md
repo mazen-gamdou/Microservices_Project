@@ -50,7 +50,6 @@ This web application features a motus game, an authentication system and a scori
      "message": "User registered successfully."
     }
     ```
-
 - `/login`: 
   - **Endpoint**: /login
   - **Method**: POST
