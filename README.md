@@ -70,6 +70,7 @@ This web application features a motus game, an authentication system and a scori
     }
     ```
 - **User Session Check**
+  
   -**Endpoint**: /api/user
   -**Method**: GET
   -**Description**: Checks if the user is currently logged in and returns the username.
