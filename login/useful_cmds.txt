@@ -1,5 +1,7 @@
 docker network create auth-network
-docker run --name postgres-db --network auth-network -e POSTGRES_PASSWORD=toto -d -p 5432:5432 -v ./postgres-init:/docker-entrypoint-initdb.d -v postgres-data:/var/lib/postgresql/data postgres
+docker run --name postgres-db --network auth-network -e POSTGRES_PASSWORD=toto -d -p 5432:5432 -v 
+./postgres-init:/docker-entrypoint-initdb.d -v postgres-data:/var/lib/postgresql/data postgres
+
 docker build -t auth-service .
 docker run --name auth-service-container --network auth-network -p 3002:3002 -d auth-service
 docker exec -it postgres-db psql -U postgres

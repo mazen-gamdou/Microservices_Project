@@ -13,6 +13,7 @@ services:
       - "5432:5432"
     networks:
       - auth-network
+
   auth-service:
     build: ./login
     ports:
@@ -20,11 +21,11 @@ services:
     depends_on:
       - postgres-db
     environment:
-      - DATABASE_URL=postgres://postgres:toto@db:5432/postgres
+      - DATABASE_URL=postgres://postgres-db:toto@db:5432/postgres
     networks:
       - auth-network
 
-      
+
   redis:
     image: redis:latest
     ports:
@@ -54,15 +55,38 @@ services:
       - redis
     environment:
       - REDIS_URL=redis://redis:6379
-
-  # Motus Service
-  motus:
+  motus1:
     build: ./Motus
     ports:
-      - "3000:3000"
+      - "4001:4000"
+    environment:
+      - PORT=4000
+    networks:
+      - motus-network
+
+  motus2:
+    build: ./Motus
+    ports:
+      - "4002:4000"
+    environment:
+      - PORT=4000
+    networks:
+      - motus-network
+
+  # HAProxy Service
+  haproxy:
+    image: haproxy:latest
+    container_name: my-haproxy-instance
+    ports:
+      - "3000:3000"  # Assuming HAProxy is configured to listen on port 3000
+    networks:
+      - motus-network
+    volumes:
+      - ./Motus/haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
 
 networks:
   auth-network:
+  motus-network:
 
 volumes:
   postgres-data:
