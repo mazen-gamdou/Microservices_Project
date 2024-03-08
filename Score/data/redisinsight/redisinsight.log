@@ -20,3 +20,11 @@ WARNING 2024-03-08 17:09:36,652 redisinsight_startup REDISINSIGHT_HOST, REDISINS
 Please use RIHOST, RIPORT, RIHOMEDIR and RILOGDIR environment variables for setting host, port, db directory and log directory respectively.
 WARNING 2024-03-08 21:03:37,334 redisinsight_startup REDISINSIGHT_HOST, REDISINSIGHT_PORT, REDISINSIGHT_HOME_DIR and LOG_DIR environment variables will be deprecated in the version v1.9. 
 Please use RIHOST, RIPORT, RIHOMEDIR and RILOGDIR environment variables for setting host, port, db directory and log directory respectively.
+WARNING 2024-03-08 22:45:26,151 redisinsight_startup REDISINSIGHT_HOST, REDISINSIGHT_PORT, REDISINSIGHT_HOME_DIR and LOG_DIR environment variables will be deprecated in the version v1.9. 
+Please use RIHOST, RIPORT, RIHOMEDIR and RILOGDIR environment variables for setting host, port, db directory and log directory respectively.
+WARNING 2024-03-08 23:05:28,443 redisinsight_startup REDISINSIGHT_HOST, REDISINSIGHT_PORT, REDISINSIGHT_HOME_DIR and LOG_DIR environment variables will be deprecated in the version v1.9. 
+Please use RIHOST, RIPORT, RIHOMEDIR and RILOGDIR environment variables for setting host, port, db directory and log directory respectively.
+WARNING 2024-03-08 23:10:03,166 redisinsight_startup REDISINSIGHT_HOST, REDISINSIGHT_PORT, REDISINSIGHT_HOME_DIR and LOG_DIR environment variables will be deprecated in the version v1.9. 
+Please use RIHOST, RIPORT, RIHOMEDIR and RILOGDIR environment variables for setting host, port, db directory and log directory respectively.
+WARNING 2024-03-08 23:13:51,329 redisinsight_startup REDISINSIGHT_HOST, REDISINSIGHT_PORT, REDISINSIGHT_HOME_DIR and LOG_DIR environment variables will be deprecated in the version v1.9. 
+Please use RIHOST, RIPORT, RIHOMEDIR and RILOGDIR environment variables for setting host, port, db directory and log directory respectively.
