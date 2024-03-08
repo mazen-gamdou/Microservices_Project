@@ -28,7 +28,7 @@ This web application features a motus game, an authentication system and a scori
   - **Method**: POST
   - **Description**: Registers a new user by adding their details to the database.
   - **Body**: 
-    ```json
+      ```json
     {
       "firstname": "Tokyo",
       "lastname": "Doan",
@@ -38,14 +38,14 @@ This web application features a motus game, an authentication system and a scori
     ```
   - **Response**:  A message confirming registration or an error message if registration fails.
   - **Success Response Example**:
-   ```json
+     ```json
     {
      "message": "User registered successfully."
     }
     ```
 
   - **Error Response Example**:
-  ```json
+    ```json
     {
      "message": "User registered successfully."
     }
@@ -82,10 +82,10 @@ This web application features a motus game, an authentication system and a scori
     ```
 ### Security Considerations
 
-**Passwords**: All passwords are hashed using bcrypt before being stored in the database.
-**Sessions**: Sessions are managed with express-session. Ensure to use the secure flag on cookies in production with HTTPS.
-**Environment Variables**: Do not hardcode sensitive information such as database credentials. Use environment variables.
-**CORS**: Configure CORS appropriately to ensure that the API only accepts requests from trusted origins.
+-**Passwords**: All passwords are hashed using bcrypt before being stored in the database.
+-**Sessions**: Sessions are managed with express-session. Ensure to use the secure flag on cookies in production with HTTPS.
+-**Environment Variables**: Do not hardcode sensitive information such as database credentials. Use environment variables.
+-**CORS**: Configure CORS appropriately to ensure that the API only accepts requests from trusted origins.
 
 ## Game Service
 
