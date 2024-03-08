@@ -1,41 +1,11 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Guess the Word</title>
-  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="styles.css">
-</head>
-<body>
-
-  <h1>Guess the Word</h1>
-  
-  <form id="guess-form">
-    <label for="word-input">Guess:</label>
-    <input type="text" id="word-input">
-    <button type="submit">Submit</button>
-  </form>
-
-  <div id="result"></div>
- 
-
-  <script src="script.js"></script>
-  <br>
-  <button onclick="window.location.href='http://localhost:3005/index.html';">Check Scores</button>
-
-</body>
-</html> -->
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Guess the Word</title>
+  <link rel="stylesheet" type="text/css" href="styles.css"> <!-- Ensure this path is correct -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
 
@@ -44,33 +14,15 @@
   <div id="welcome-message">Loading...</div>
   
   <form id="guess-form">
-    <label for="word-input">Guess:</label>
-    <input type="text" id="word-input">
-    <button type="submit">Submit</button>
+    <label for="word-input">Your Guess:</label>
+    <input type="text" id="word-input" autocomplete="off">
+    <button type="submit">Submit Guess</button>
   </form>
 
   <div id="result"></div>
- 
+  <div id="remaining-tries"></div>
 
-  <script src="script.js"></script>
-  <script>
-    $(document).ready(function() {
-      $.ajax({
-        url: "http://localhost:3002/api/user",
-        xhrFields: {
-          withCredentials: true
-        },
-        success: function(data) {
-          $('#welcome-message').text(`Welcome, ${data.username}!`);
-        },
-        error: function() {
-          $('#welcome-message').text('Welcome, Guest!');
-        }
-      });
-    });
-  </script>
-  <br>
-  <button onclick="window.location.href='http://localhost:3005/index.html';">Check Scores</button>
+  <script src="script.js"></script> <!-- Ensure this path is correct -->
 
 </body>
 </html>
