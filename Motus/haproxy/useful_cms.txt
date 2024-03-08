@@ -1,2 +1,0 @@
-docker build -t my-haproxy .
-docker run -d --name my-haproxy-instance --network="host" my-haproxy
