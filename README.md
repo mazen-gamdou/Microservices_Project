@@ -53,7 +53,7 @@ This web application features a motus game, an authentication system and a scori
 - `/login`: 
   - **Endpoint**: /login
   - **Method**: POST
-  - **Description**: Authenticates a user by checking their credentials and creating a session.
+  - **Description**: Authenticates users by checking their credentials and creating a session.
   - **Body**: 
     ```json
     {
@@ -61,7 +61,7 @@ This web application features a motus game, an authentication system and a scori
       "password": "secure_password"
     }
     ```
-  - **Response**: A redirection to the game's main page if successful, or an error message if login fails.
+  - **Response**: A redirection to the game's main page if successful or an error message if login fails.
   - **Error Response Example**:
     ```json
     {
