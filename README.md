@@ -5,8 +5,9 @@
 - Mazen Gamdou
 
 ## How it works ?
-Download the github repository, open a terminal at the root of the project. Run the following commands :
-
+Download the github repository, open a terminal at the root of the project. Run the following command :
+`docker compose -f "docker-compose.yml" up -d --build`
+Now, you can go to http://localhost:3002 to register and login. 
 ## Overview
 
 This web application features a motus game, an authentication system and a scoring system. It employs a microservice architecture with services for authentication, game logic, and score tracking. User information is stored in a PostgreSQL database, while game scores are managed in a Redis database.
