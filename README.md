@@ -108,7 +108,7 @@ This web application features a motus game, an authentication system and a scori
 
 ### Technologies
 
-- Backend: Node.jS 
+- Backend: Node.js
 - Backend web application framework: Express.js
 
 ## Score API
@@ -140,7 +140,7 @@ This web application features a motus game, an authentication system and a scori
 ### Technologies
 
 - Database: Redis
-- Backend: [Your technology stack]
+- Backend: Node.js / Express.js
 
 ## HAProxy Load Balancer
 
