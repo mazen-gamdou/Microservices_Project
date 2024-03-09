@@ -156,11 +156,8 @@ function calculateNewAverageTries(previousAverageTries, previousWordsFound, curr
   let numericPreviousAverageTries = parseFloat(previousAverageTries);
   let numericPreviousWordsFound = parseInt(previousWordsFound);
 
-  // Calculate the total number of tries used so far (including the current word)
-  let totalTries = numericPreviousAverageTries * numericPreviousWordsFound + currentTries;
-
-  // Calculate the new average tries by dividing the total tries by the new total number of words found
-  let newAverageTries = totalTries / (numericPreviousWordsFound + 1);
+  // Calculate the new average tries using the formula: (6 - currentTries) / (previousWordsFound + 1)
+  let newAverageTries = (7 - currentTries) / (numericPreviousWordsFound + 1);
 
   return newAverageTries;
 }
