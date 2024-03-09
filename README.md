@@ -159,6 +159,15 @@ Distributes traffic to the Motus Game Service instances, enhancing application s
 
 The application is deployed using Docker and Docker Compose, enabling streamlined setup and scalability. The `docker-compose.yml` file defines the services, networks, and volumes required for the application.
 
+## Perspectives
+
+1. **Implementation of Cookies Logic**: Incorporating cookies into the application would allow for enhanced user session management.
+
+2. **Monitoring with Grafana**: Integrating monitoring tools like Grafana.
+
+3. **Social Logins (Google and Facebook)**: Adding support for social logins through platforms like Google and Facebook could streamline the authentication process, making it easier for users to sign up and log in.
+
+
 ---
 
 This documentation provides a foundational overview of your web application's architecture, services, and endpoints. Adjust the technology stack, deployment instructions, and any additional details specific to your implementation as necessary.
