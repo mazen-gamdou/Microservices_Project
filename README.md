@@ -158,7 +158,54 @@ Distributes traffic to the Motus Game Service instances, enhancing application s
 
 The sequence diagram below illustrates the interactions between the various components of our microservices architecture, including the Authentication Service, Game Service, Score API, and HAProxy Load Balancer. This visual representation helps to understand the flow of requests and data throughout the system.
 
-![Project Sequence Diagram](https://www.mermaidchart.com/raw/b6fb14c2-fec5-46bb-bba2-d0af2aa990b0?theme=light&version=v0.1&format=svg)
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant L as Login Service
+    participant DB as PostgreSQL DB
+    participant H as HAProxy
+    participant M1 as Motus Service 1
+    participant M2 as Motus Service 2
+    participant S as Score Service
+    participant R as Redis DB
+
+    U->>L: Navigate to /login or /register
+    L->>DB: Query user data
+    DB-->>L: Return user data
+    L->>U: Display login/register result
+    alt Successful Login
+        L->>U: Set session and redirect to HAProxy (/)
+        U->>H: Request Motus game
+        alt Load Balancing
+            H->>M1: Route to Motus Service 1
+            M1->>U: Serve game interface
+            U->>M1: Play game, make guesses
+            alt Correct Guess
+                M1->>S: Call /setscore API
+                S->>R: Update score in Redis
+                R-->>S: Confirm score update
+                S-->>M1: Return success response
+                M1->>U: Display updated score
+            end
+        else
+            H->>M2: Route to Motus Service 2
+            M2->>U: Serve game interface
+            U->>M2: Play game, make guesses
+            alt Correct Guess
+                M2->>S: Call /setscore API
+                S->>R: Update score in Redis
+                R-->>S: Confirm score update
+                S-->>M2: Return success response
+                M2->>U: Display updated score
+            end
+        end
+    else Login/Register Failed
+        L->>U: Display error message
+    end
+    U->>L: Request /logout
+    L->>U: Clear session and redirect to /login
+
+```
 
 ## Deployment
 
