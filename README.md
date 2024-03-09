@@ -7,7 +7,7 @@
 ## How it works ?
 Download the github repository, open a terminal at the root of the project. Run the following command:
 
-`docker compose -f "docker-compose.yml" up -d --build`.
+`docker-compose up -d --force-recreate` or `docker compose -f "docker-compose.yml" up -d --build`.
 
 Now, you can go to http://localhost:3002 to register and login. 
 
