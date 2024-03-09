@@ -1,8 +1,8 @@
 # Microservices Project
 ### Group members
-Amr Mohamed
-Anh Thu DOAN
-Mazen Gamdou
+- Amr Mohamed
+- Anh Thu DOAN
+- Mazen Gamdou
 
 ## Overview
 
