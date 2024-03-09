@@ -5,8 +5,10 @@
 - Mazen Gamdou
 
 ## How it works ?
-Download the github repository, open a terminal at the root of the project. Run the following command :
-`docker compose -f "docker-compose.yml" up -d --build`
+Download the github repository, open a terminal at the root of the project. Run the following command:
+
+`docker compose -f "docker-compose.yml" up -d --build`.
+
 Now, you can go to http://localhost:3002 to register and login. 
 ## Overview
 
