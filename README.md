@@ -154,6 +154,11 @@ This web application features a motus game, an authentication system and a scori
 
 Distributes traffic to the Motus Game Service instances, enhancing application scalability and availability.
 
+## Project Sequence Diagram
+
+The sequence diagram below illustrates the interactions between the various components of our microservices architecture, including the Authentication Service, Game Service, Score API, and HAProxy Load Balancer. This visual representation helps to understand the flow of requests and data throughout the system.
+
+![Project Sequence Diagram](https://www.mermaidchart.com/raw/b6fb14c2-fec5-46bb-bba2-d0af2aa990b0?theme=light&version=v0.1&format=svg)
 
 ## Deployment
 
