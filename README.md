@@ -10,6 +10,8 @@ Download the github repository, open a terminal at the root of the project. Run 
 `docker compose -f "docker-compose.yml" up -d --build`.
 
 Now, you can go to http://localhost:3002 to register and login. 
+
+Once you login you will be redirected to the HAProxy on http://localhost:3000 that will reroute you to the port 4000 where the Motus game is deployed.
 ## Overview
 
 This web application features a motus game, an authentication system and a scoring system. It employs a microservice architecture with services for authentication, game logic, and score tracking. User information is stored in a PostgreSQL database, while game scores are managed in a Redis database.
