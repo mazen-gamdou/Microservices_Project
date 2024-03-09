@@ -167,7 +167,7 @@ The application is deployed using Docker and Docker Compose, enabling streamline
 
 3. **Social Logins (Google and Facebook)**: Adding support for social logins through platforms like Google and Facebook could streamline the authentication process, making it easier for users to sign up and log in.
 
-
+4. **OAuth Flow and Secure Session Management**: Future development will include completing the OAuth authentication flow, integrating secure session management, and enhancing user authentication with token-based mechanisms. 
 ---
 
 This documentation provides a foundational overview of your web application's architecture, services, and endpoints. Adjust the technology stack, deployment instructions, and any additional details specific to your implementation as necessary.
