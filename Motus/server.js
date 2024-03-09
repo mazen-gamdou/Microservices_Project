@@ -1,20 +1,16 @@
+const e = require('express');
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
 const seedrandom = require('seedrandom');
-const cors = require('cors'); // Remember to install cors package if you haven't already
+const os = require('os');
 
 const app = express();
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 4000
 
-// Middleware to serve static files from the 'www' directory
 app.use(express.static("www"));
 
-// Optional: Use CORS if your client-side application is served from a different port or domain
-app.use(cors());
-
-// Endpoint to get a random word
-app.get('/word', (req, res) => {
+app.get('/Word', (req, res) => {
   const filePath = path.join(__dirname, 'data', 'liste_francais_utf8.txt');
 
   fs.readFile(filePath, 'utf8', (err, data) => {
@@ -23,22 +19,32 @@ app.get('/word', (req, res) => {
       return res.status(500).send('Internal Server Error');
     }
 
+    // Split the text into words
     const words = data.split('\n');
-    const currentDate = new Date().toISOString().split('T')[0];
-    const seed = `${currentDate}-yourSecretSeedHere`; // Customize the seed as needed
-    const rng = seedrandom(seed);
-    const randomWord = words[Math.round(rng() * (words.length - 1))];
 
-    res.type('text').send(randomWord); // Send the random word as a plain text response
+
+    // Get current date in YYYY-MM-DD format
+    const currentDate = new Date().toISOString().split('T')[0];
+
+    // Concatenate the current date with a constant seed
+    const seed = `${currentDate}-yourSecretSeedHere`;
+
+    // Use seedrandom to generate a pseudo-random number based on the seed
+    const rng = seedrandom(seed);
+    const randomNum = rng();
+
+    const arrayLength = words.length;
+    const randomNum_normalized = Math.round(randomNum * arrayLength);
+    
+
+    res.send(words[randomNum_normalized])
   });
 });
 
-// Start the Express server
 app.listen(port, () => {
   console.log(`Server is listening at http://localhost:${port}`);
 });
 
-// Optional: Endpoint to check which port the application is running on
 app.get('/port', (req, res) => {
   const hostname = os.hostname();
   res.send(`MOTUS APP working on ${hostname} port ${port}`);
