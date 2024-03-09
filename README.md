@@ -147,10 +147,6 @@ This web application features a motus game, an authentication system and a scori
 Distributes traffic to the Motus Game Service instances, enhancing application scalability and availability.
 
 
-## Security Considerations
-
-Ensure all communications are secured via HTTPS, and passwords are hashed before being stored in the PostgreSQL database. Use JWTs (JSON Web Tokens) for managing user sessions post-authentication.
-
 ## Deployment
 
 The application is deployed using Docker and Docker Compose, enabling streamlined setup and scalability. The `docker-compose.yml` file defines the services, networks, and volumes required for the application.
