@@ -14,7 +14,7 @@ const client = redis.createClient({
 });
 // If the Motus game runs on a different port, add it to the allowed origins
 const corsOptions = {
-    origin: ['http://localhost:3000', 'http://my-haproxy-instance:3000'], // Replace with the actual origin of your Motus game
+    origin: ['http://localhost:3000', 'http://my-haproxy-instance:3000', 'http://localhost:4000'], // Replace with the actual origin of your Motus game
     credentials: true,
   };
   

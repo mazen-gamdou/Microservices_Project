@@ -33,6 +33,8 @@ services:
     restart: always
     volumes:
       - ./Score/data/redis:/data
+    networks:
+      - motus-network
 
   redisinsight:
     image: redislabs/redisinsight:latest
@@ -46,6 +48,8 @@ services:
       - ./Score/data/redisinsight:/db
     environment:
       - REDISINSIGHT_HOST=0.0.0.0
+    networks:
+      - motus-network
 
   score-app:
     build: ./Score
@@ -55,6 +59,8 @@ services:
       - redis
     environment:
       - REDIS_URL=redis://redis:6379
+    networks:
+      - motus-network
   motus1:
     build: ./Motus
     ports:
