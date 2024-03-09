@@ -27,50 +27,62 @@ $(document).ready(function() {
   });
 
   function initializeGame() {
-      // Fetch the random word from the server
-      $.get('/word', function(data) {
-          randomWord = data.toLowerCase();
-          const wordLength = randomWord.length - 1;
-          $("#word-input").attr("maxlength", wordLength);
-          $("#result").html(`Word Length: ${wordLength} letters`);
+    // Fetch the random word from the server
+    $.get('/word', function(data) {
+        randomWord = data.toLowerCase();
+        const wordLength = randomWord.length - 1; // Adjust based on your game's logic if needed
+        $("#word-input").attr("maxlength", wordLength);
+        $("#result").html(`Word Length: ${wordLength} letters`);
 
-          // Handle form submission
-          $("#guess-form").submit(function(event) {
-              event.preventDefault();
-              const guessedWord = $("#word-input").val().toLowerCase();
-              if (guessedWord.length !== wordLength) {
-                  alert("Please enter a word with the correct number of letters.");
-                  return;
-              }
+        // Handle form submission for guesses
+        $("#guess-form").submit(function(event) {
+            event.preventDefault(); // Prevent form from submitting traditionally
+            const guessedWord = $("#word-input").val().toLowerCase();
 
-              remainingTries--;
-              let resultHtml = "";
-              for (let i = 0; i < guessedWord.length; i++) {
-                  if (guessedWord[i] === randomWord[i]) {
-                      resultHtml += `<span class="green">${guessedWord[i]}</span>`;
-                  } else if (randomWord.includes(guessedWord[i])) {
-                      resultHtml += `<span class="orange">${guessedWord[i]}</span>`;
-                  } else {
-                      resultHtml += `<span>${guessedWord[i]}</span>`;
-                  }
-              }
+            // Ensure the guess is the correct length
+            if (guessedWord.length !== wordLength) {
+                alert("Please enter a word with the correct number of letters.");
+                return;
+            }
 
-              $("#result").html(`Result: ${resultHtml} | Remaining Tries: ${remainingTries}`);
-              if (guessedWord === randomWord) {
-                  alert("Congratulations! You guessed the word.");
-                  updateScore(playerId, 1, calculateNewAverageTries());
-                  resetGame();
-              } else if (remainingTries === 0) {
-                  alert(`Sorry, you're out of tries. The correct word was: ${randomWord}`);
-                  resetGame();
-              }
-          });
+            // Process the guessed word
+            let resultHtml = "";
+            let correctGuess = true; // Assume correct guess until proven otherwise
+            for (let i = 0; i < guessedWord.length; i++) {
+                if (guessedWord[i] === randomWord[i]) {
+                    resultHtml += `<span class="green">${guessedWord[i]}</span>`; // Correct letter and position
+                } else if (randomWord.includes(guessedWord[i])) {
+                    resultHtml += `<span class="orange">${guessedWord[i]}</span>`; // Correct letter, wrong position
+                    correctGuess = false; // Part of the guess is incorrect
+                } else {
+                    resultHtml += `<span>${guessedWord[i]}</span>`; // Incorrect letter
+                    correctGuess = false; // Part of the guess is incorrect
+                }
+            }
 
-          $("#word-input").on("input", function() {
-              const enteredWordLength = $(this).val().length;
-              $("#guess-form button").prop("disabled", enteredWordLength < wordLength);
-          });
-      });
+            $("#result").html(`Result: ${resultHtml}`);
+            remainingTries--; // Decrement the remaining tries
+
+            // Check if the whole guess was correct
+            if (correctGuess) {
+                alert("Congratulations! You guessed the word.");
+                updateScore(playerId, 1, calculateNewAverageTries()); // Update score with correct guess
+                resetGame(); // Reset the game for a new word
+            } else if (remainingTries === 0) {
+                alert(`Sorry, you're out of tries. The correct word was: ${randomWord}`);
+                resetGame(); // Reset the game after running out of tries
+            } else {
+                // Update the display for remaining tries if the game continues
+                $("#result").append(` | Remaining Tries: ${remainingTries}`);
+            }
+        });
+
+        // Enable or disable the submit button based on the input length
+        $("#word-input").on("input", function() {
+            const enteredWordLength = $(this).val().length;
+            $("#guess-form button").prop("disabled", enteredWordLength < wordLength);
+        });
+    });
   }
 
   function updateScore(playerId, wordsFoundIncrement, newAverageTries) {
